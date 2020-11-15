@@ -58,39 +58,39 @@ chiave[i]=rand()%128;
 for(int j=0; j<i;j++){
   if(chiave[i]==chiave[j]){
     i--;
-    break;
+    break;//genera numeri casuali per ogni cella dell'array
   }
 }
 }
 lunghezza_chiave=strlen(chiave);
 printf("la chiave come carattere:");
-for(int i=0;i<=lunghezza_chiave;i++){
+for(int i=0;i<=lunghezza_chiave;i++){//stampa la chiave
 printf(" %c",  chiave[i]);
 }
 printf("\n la chiave come intero:" );
-for(int i=0;i<=lunghezza_chiave;i++){
+for(int i=0;i<=lunghezza_chiave;i++){//stampa la chiave
 printf(" %d",  chiave[i]);
 }
-for(int i=0;i<lunghezza_chiave;i++){
+for(int i=0;i<lunghezza_chiave;i++){//cripta il messaggio
 buff2[i]= buff[i]^chiave[i];
 }
 printf("\n questo è il messaggio cifrato in valori numerici: ");
-for(int i=0; i<128; i++){
+for(int i=0; i<128; i++){//stampa il messaggio dcifrato
 printf("%d",buff2[i]);
 }
 printf("\n questo è il messaggio cifrato: ");
-for(int i=0; i<128; i++){
+for(int i=0; i<128; i++){//stampa il messaggio cifrato
 printf("%c",buff2[i]);}
 
 
 break;
 }
 for(int i=0;i<lunghezza_chiave;i++){
-  buff3[i]=buff2[i]^chiave[i];
+  buff3[i]=buff2[i]^chiave[i];//decripta il messaggio
 }
   lunghezza_decripta=strlen(buff3);
   printf("\n questo è il messaggio decriptato:" );
-  for(int i=0; i<lunghezza_decripta; i++){
+  for(int i=0; i<lunghezza_decripta; i++){//stampa il messaggio decriptato
   printf("%c",buff3[i]);//stampa testo cifrato
 }
 }
