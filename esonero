@@ -1,0 +1,96 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main(){
+char buff[128];//stringa da criptare
+char chiave[128];
+char buff2[128];//stringa criptata
+char buff3[128];//stringa decriptata
+int scelta;
+int lunghezza_buff;
+int lunghezza_chiave;
+int lunghezza_decripta;
+time_t t;
+printf("inserisci il messaggio che vuoi modificare :\n");//inserimento del messaggio da cifrare
+fgets(buff,128,stdin);
+lunghezza_buff=strlen(buff);
+
+//stampa il messaggio da cifrare
+printf("questo è il messaggio da cifrare: \n");
+for(int i=0; i<lunghezza_buff; i++)
+printf("%c",buff[i]);
+//scelta di inserire una chiave manuale o casuale con controllo se inserisci un numero diverso da 1 e 2
+do{
+printf("inserisci 1 se vuoi inserire una chiave da tastiera o inserisci 2 se la vuoi inserire in modo casuale:  ");
+scanf("%d", &scelta);
+}
+//controllo del numero
+while(scelta<1 || scelta>2);
+switch(scelta){
+case 1:
+printf("inserisci la chiave di lunghezza pari o superiore al messaggio: \n");
+do{
+fgets(chiave,128,stdin);//inserimento chiave dalla tastiera
+lunghezza_chiave=strlen(chiave);
+}
+while(lunghezza_chiave<lunghezza_buff);//controllo se la chiave sia almeno lunga quanto il messaggio da cifrare
+for(int i=0;i<lunghezza_chiave;i++){
+buff2[i]= buff[i]^chiave[i]; //cifratura del messaggio tramite la chiave
+}
+printf("questo è il messaggio cifrato: ");
+for(int i=0; i<128; i++){
+printf("%c",buff2[i]);//stampa testo cifrato in valori numerici
+}
+printf("\n");
+printf("questo è il messaggio cifrato in valori numerici: ");
+for(int i=0; i<128; i++){
+printf("%d",buff2[i]);
+}
+
+
+break;
+case 2:
+for(int i=0;i<=lunghezza_buff;i++){
+srand((unsigned)time(&t));
+chiave[i]=rand()%128;
+for(int j=0; j<i;j++){
+  if(chiave[i]==chiave[j]){
+    i--;
+    break;
+  }
+}
+}
+lunghezza_chiave=strlen(chiave);
+printf("la chiave come carattere:");
+for(int i=0;i<=lunghezza_chiave;i++){
+printf(" %c",  chiave[i]);
+}
+printf("\n la chiave come intero:" );
+for(int i=0;i<=lunghezza_chiave;i++){
+printf(" %d",  chiave[i]);
+}
+for(int i=0;i<lunghezza_chiave;i++){
+buff2[i]= buff[i]^chiave[i];
+}
+printf("\n questo è il messaggio cifrato in valori numerici: ");
+for(int i=0; i<128; i++){
+printf("%d",buff2[i]);
+}
+printf("\n questo è il messaggio cifrato: ");
+for(int i=0; i<128; i++){
+printf("%c",buff2[i]);}
+
+
+break;
+}
+for(int i=0;i<lunghezza_chiave;i++){
+  buff3[i]=buff2[i]^chiave[i];
+}
+  lunghezza_decripta=strlen(buff3);
+  printf("\n questo è il messaggio decriptato:" );
+  for(int i=0; i<lunghezza_decripta; i++){
+  printf("%c",buff3[i]);//stampa testo cifrato
+}
+}
